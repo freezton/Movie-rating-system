@@ -1,4 +1,4 @@
-package com.example.movieratingsystem.controller;
+package by.vladpr.movieratingsystem.controller;
 
 import java.io.*;
 

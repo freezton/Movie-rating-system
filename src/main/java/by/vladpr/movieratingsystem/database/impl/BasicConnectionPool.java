@@ -11,15 +11,15 @@ import java.util.List;
 public class BasicConnectionPool implements ConnectionPool {
 
     private static final ConnectionPool connectionPool = new BasicConnectionPool();
-    private final String URL = "jdbc:mysql://localhost:3306/movie_rating_system";
-    private final String USER = "mysql_user";
-    private final String PASSWORD = "12345Abc";
-    private List<Connection> connectionList;
-    private List<Connection> usedConnections;
+    private static final String URL = "jdbc:mysql://localhost:3306/movie_rating_system";
+    private static final String USER = "mysql_user";
+    private static final String PASSWORD = "12345Abc";
+    private static List<Connection> connectionList;
+    private static List<Connection> usedConnections;
     private static final int POOL_SIZE = 10;
 
-    public ConnectionPool getInstance() throws SQLException {
-        if (connectionPool == null) {
+    public static ConnectionPool getInstance() throws SQLException {
+        if (connectionList == null) {
             usedConnections = new ArrayList<>();
             connectionList = new ArrayList<>(POOL_SIZE);
             for (int i = 0; i < 10; i++) {

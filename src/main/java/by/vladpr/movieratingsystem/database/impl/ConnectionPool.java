@@ -1,6 +1,6 @@
 package by.vladpr.movieratingsystem.database.impl;
 
-import by.vladpr.movieratingsystem.database.ConnectionPool;
+import by.vladpr.movieratingsystem.database.AbstractConnectionPool;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasicConnectionPool implements ConnectionPool {
+public class ConnectionPool implements AbstractConnectionPool {
 
-    private static final ConnectionPool connectionPool = new BasicConnectionPool();
+    private static final AbstractConnectionPool connectionPool = new ConnectionPool();
     private static final String URL = "jdbc:mysql://localhost:3306/movie_rating_system";
     private static final String USER = "mysql_user";
     private static final String PASSWORD = "12345Abc";
@@ -18,7 +18,7 @@ public class BasicConnectionPool implements ConnectionPool {
     private static List<Connection> usedConnections;
     private static final int POOL_SIZE = 10;
 
-    public static ConnectionPool getInstance() throws SQLException {
+    public static AbstractConnectionPool getInstance() throws SQLException {
         if (connectionList == null) {
             usedConnections = new ArrayList<>();
             connectionList = new ArrayList<>(POOL_SIZE);

@@ -1,3 +1,4 @@
+src/main/java/by/vladpr/movieratingsystem/temp/
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

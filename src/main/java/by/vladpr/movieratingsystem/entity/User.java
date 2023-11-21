@@ -7,16 +7,18 @@ public class User {
     private String password;
     private int roleId;
     private int status;
+    private boolean isBanned;
 
     public User() {
     }
 
-    public User(int id, String username, String password, int roleId, int status) {
+    public User(int id, String username, String password, int roleId, int status, boolean isBanned) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.roleId = roleId;
         this.status = status;
+        this.isBanned = isBanned;
     }
 
     public int getId() {
@@ -57,6 +59,14 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public boolean isBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
     }
 
     @Override

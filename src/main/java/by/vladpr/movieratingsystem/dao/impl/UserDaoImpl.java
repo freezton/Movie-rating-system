@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class UserDaoImpl extends AbstractQueryCreator implements UserDao {
     private static final String FIND_USER_BY_ID_QUERY = "SELECT * FROM users WHERE id=?";
-    private static final String SAVE_USER_QUERY = "INSERT INTO users (username, password, role_id, status) VALUES (?, ?, ?, ?)";
+    private static final String SAVE_USER_QUERY = "INSERT INTO users (username, password, role_id, status, is_banned) VALUES (?, ?, ?, ?. ?)";
     private static final String REMOVE_USER_BY_ID_QUERY = "DELETE FROM users WHERE id=?";
     private static final String FIND_USER_BY_USERNAME_QUERY = "SELECT * FROM users WHERE username=?";
     private static final String FIND_USER_BY_ROLE_ID_QUERY = "SELECT * FROM users WHERE role_id=?";
@@ -37,7 +37,8 @@ public class UserDaoImpl extends AbstractQueryCreator implements UserDao {
                 user.getUsername(),
                 user.getPassword(),
                 user.getRoleId(),
-                user.getStatus()
+                user.getStatus(),
+                user.isBanned()
         )) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -67,7 +68,7 @@ public class UserDaoImpl extends AbstractQueryCreator implements UserDao {
 
     @Override
     public List<User> findByRoleId(long roleId) throws DaoException {
-        List<User> list = new ArrayList<>();
+        List<User> list;
         try (PreparedStatement preparedStatement = createStatement(FIND_USER_BY_ROLE_ID_QUERY, roleId)) {
             list = findUserList(preparedStatement);
         } catch (SQLException e) {
@@ -80,12 +81,7 @@ public class UserDaoImpl extends AbstractQueryCreator implements UserDao {
         User user = null;
         try (ResultSet resultSet = preparedStatement.executeQuery()) {
             if (resultSet.next()) {
-                user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
-                user.setRoleId(resultSet.getInt("role_id"));
-                user.setStatus(resultSet.getInt("status"));
+                user = createUser(resultSet);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -97,17 +93,22 @@ public class UserDaoImpl extends AbstractQueryCreator implements UserDao {
         List<User> list = new ArrayList<>();
         try (ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
-                user.setRoleId(resultSet.getInt("role_id"));
-                user.setStatus(resultSet.getInt("status"));
-                list.add(user);
+                list.add(createUser(resultSet));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
         return list;
+    }
+
+    private User createUser(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setId(resultSet.getInt("id"));
+        user.setUsername(resultSet.getString("username"));
+        user.setPassword(resultSet.getString("password"));
+        user.setRoleId(resultSet.getInt("role_id"));
+        user.setStatus(resultSet.getInt("status"));
+        user.setBanned(resultSet.getBoolean("is_banned"));
+        return user;
     }
 }

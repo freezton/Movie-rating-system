@@ -4,6 +4,10 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
 
+    <listener>
+        <listener-class>by.vladpr.movieratingsystem.controller.ContextListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>by.vladpr.movieratingsystem.controller.FrontController</servlet-class>

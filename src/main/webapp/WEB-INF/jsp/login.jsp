@@ -8,8 +8,12 @@
     <title>Login</title>
 </head>
 <body>
-<div class="">
-    <form action="" method="post" class="form">
+<c:choose>
+    <c:when test="${not empty sessionScope.username}">
+        <c:redirect url="/movies" />
+    </c:when>
+    <c:otherwise>
+    <form action="<c:url value="/login"/>" method="post" class="form">
         <div class="container">
             <label for="username" class="label">Username:</label>
             <input type="text" id="username" name="username" class="input"/>
@@ -23,11 +27,10 @@
         </button>
         <div class="link">
             <span>No account?</span>
-<%--            <a href="/controller?page=registration.jsp">Sign up</a>--%>
             <a href="<c:url value="/registration-form"/>">Sign up</a>
-
         </div>
     </form>
-</div>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>

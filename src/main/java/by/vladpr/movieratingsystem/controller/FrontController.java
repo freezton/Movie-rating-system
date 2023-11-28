@@ -30,6 +30,7 @@ public class FrontController extends HttpServlet {
 //        LOGGER.info(request.getServletPath());
 //        LOGGER.info(request.getPathInfo());
 //        LOGGER.info(request.getContextPath());
+
         Command command = CommandProvider.getInstance().getCommand(request);
         command.execute(request, response);
     }

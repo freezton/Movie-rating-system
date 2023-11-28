@@ -8,7 +8,6 @@
     <title>Login</title>
 </head>
 <body>
-<div class="">
     <form action="<c:url value="/registration"/>" method="post" class="form">
         <div class="container">
             <label for="username" class="label">Username:</label>
@@ -32,6 +31,5 @@
 
         </div>
     </form>
-</div>
 </body>
 </html>

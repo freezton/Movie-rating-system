@@ -44,6 +44,8 @@ public class LoginCommand implements Command {
 //                String viewPath = defineViewPath();
                 String viewPath = request.getContextPath() + CommandName.GO_TO_MOVIES_PAGE_COMMAND;
                 response.sendRedirect(viewPath);
+            } else {
+                response.sendRedirect(request.getHeader("referer"));
             }
         } catch (ValidationException e) {
             LOGGER.warn("Invalid user credentials", e);

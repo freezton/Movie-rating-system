@@ -1,7 +1,9 @@
 package by.vladpr.movieratingsystem.controller.command.impl;
 
 import by.vladpr.movieratingsystem.controller.command.CommandName;
+import by.vladpr.movieratingsystem.dao.DaoFactory;
 import by.vladpr.movieratingsystem.entity.User;
+import by.vladpr.movieratingsystem.exception.DaoException;
 import by.vladpr.movieratingsystem.exception.ServiceException;
 import by.vladpr.movieratingsystem.controller.command.Command;
 import by.vladpr.movieratingsystem.exception.ValidationException;

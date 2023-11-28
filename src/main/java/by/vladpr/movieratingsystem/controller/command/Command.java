@@ -12,5 +12,5 @@ public interface Command {
 
     static final String VIEW_PATH = "/WEB-INF/jsp/%s";
 
-    String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+    void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

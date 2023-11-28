@@ -42,6 +42,8 @@ public class ConnectionPool implements AbstractConnectionPool {
         return usedConnections.remove(connection);
     }
 
+
+
     @Override
     public String getUrl() {
         return URL;

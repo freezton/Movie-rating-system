@@ -2,26 +2,20 @@ package by.vladpr.movieratingsystem.dao;
 
 import by.vladpr.movieratingsystem.dao.impl.MovieDaoImpl;
 import by.vladpr.movieratingsystem.dao.impl.ReviewDaoImpl;
-import by.vladpr.movieratingsystem.dao.impl.RoleDaoImpl;
 import by.vladpr.movieratingsystem.dao.impl.UserDaoImpl;
 
-public final class DAOFactory {
+public final class DaoFactory {
 
-    private static final DAOFactory instance = new DAOFactory();
+    private static final DaoFactory instance = new DaoFactory();
 
     private final UserDao userDao = new UserDaoImpl();
-    private final RoleDao roleDao = new RoleDaoImpl();
     private final MovieDao movieDao = new MovieDaoImpl();
     private final ReviewDao reviewDao = new ReviewDaoImpl();
 
-    private DAOFactory() {}
+    private DaoFactory() {}
 
     public UserDao getUserDao() {
         return userDao;
-    }
-
-    public RoleDao getRoleDao() {
-        return roleDao;
     }
 
     public MovieDao getMovieDao() {
@@ -32,7 +26,7 @@ public final class DAOFactory {
         return reviewDao;
     }
 
-    public static DAOFactory getInstance() {
+    public static DaoFactory getInstance() {
         return instance;
     }
 

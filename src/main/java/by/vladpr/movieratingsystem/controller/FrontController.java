@@ -12,7 +12,6 @@ import jakarta.servlet.annotation.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@WebServlet(name = "controller", value = "/")
 public class FrontController extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(FrontController.class);
@@ -30,7 +29,7 @@ public class FrontController extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        LOGGER.info(request.getServletPath());
 //        LOGGER.info(request.getPathInfo());
-        LOGGER.info(request.getContextPath());
+//        LOGGER.info(request.getContextPath());
         Command command = CommandProvider.getInstance().getCommand(request);
         command.execute(request, response);
     }

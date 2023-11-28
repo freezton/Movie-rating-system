@@ -1,5 +1,6 @@
 package by.vladpr.movieratingsystem.dao;
 
+import by.vladpr.movieratingsystem.entity.Role;
 import by.vladpr.movieratingsystem.entity.User;
 import by.vladpr.movieratingsystem.exception.DaoException;
 
@@ -10,6 +11,8 @@ public interface UserDao extends Dao<User> {
 
     Optional<User> findByUsername(String username) throws DaoException;
 
-    List<User> findByRoleId(long id) throws DaoException;
+    Optional<User> findByUsernameAndPassword(String username, String passwordHash) throws DaoException;
+
+    List<User> findByRoleId(Role role) throws DaoException;
 
 }

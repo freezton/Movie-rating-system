@@ -1,21 +1,24 @@
 package by.vladpr.movieratingsystem.controller.command.impl;
 
 import by.vladpr.movieratingsystem.controller.command.Command;
-import by.vladpr.movieratingsystem.exception.ServiceException;
+import by.vladpr.movieratingsystem.controller.command.ViewPath;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public class WrongRequestCommand implements Command {
+public class ForwardCommand implements Command {
 
-    private static final String PAGE = "wrong-request.jsp";
-//    private static final String PAGE = "login.jsp";
+    private final String page;
+
+    public ForwardCommand(String page) {
+        this.page = page;
+    }
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(String.format(VIEW_PATH, PAGE)).forward(request, response);
-
+        request.getRequestDispatcher(String.format(ViewPath.DIRECTORY, page)).forward(request, response);
     }
 }

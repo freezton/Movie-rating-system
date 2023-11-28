@@ -24,7 +24,7 @@
         <div class="link">
             <span>No account?</span>
 <%--            <a href="/controller?page=registration.jsp">Sign up</a>--%>
-            <a href="<c:url value="/controller?page=registration.jsp"/>">Sign up</a>
+            <a href="<c:url value="/registration-form"/>">Sign up</a>
 
         </div>
     </form>

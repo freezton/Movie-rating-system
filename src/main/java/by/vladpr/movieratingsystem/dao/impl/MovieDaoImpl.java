@@ -1,9 +1,8 @@
 package by.vladpr.movieratingsystem.dao.impl;
 
 import by.vladpr.movieratingsystem.dao.MovieDao;
-import by.vladpr.movieratingsystem.database.AbstractQueryCreator;
+import by.vladpr.movieratingsystem.database.QueryProvider;
 import by.vladpr.movieratingsystem.entity.Movie;
-import by.vladpr.movieratingsystem.entity.User;
 import by.vladpr.movieratingsystem.exception.DaoException;
 
 import java.sql.PreparedStatement;
@@ -11,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class MovieDaoImpl extends AbstractQueryCreator implements MovieDao {
+public class MovieDaoImpl extends QueryProvider implements MovieDao {
 
     private static final String FIND_MOVIE_BY_ID_QUERY = "SELECT * FROM movies WHERE id=?";
     private static final String SAVE_MOVIE_QUERY = "INSERT INTO movies (title, description, year_of_release) VALUES (?, ?, ?)";

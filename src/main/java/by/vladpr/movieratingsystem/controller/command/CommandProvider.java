@@ -30,6 +30,7 @@ public final class CommandProvider {
         repository.put(GO_TO_LOGIN_PAGE_COMMAND, new ForwardCommand(ViewPath.REDIRECT_LOGIN_FORM));
         repository.put(GO_TO_REGISTRATION_PAGE_COMMAND, new ForwardCommand(ViewPath.REDIRECT_REGISTRATION_FORM));
         repository.put(GO_TO_MOVIES_PAGE_COMMAND, new ForwardCommand(ViewPath.MOVIES_PAGE));
+        repository.put(GO_TO_ADMIN_PAGE_COMMAND, new ForwardCommand(ViewPath.ADMIN_PAGE));
 
         repository.put(WRONG_REQUEST_COMMAND, new ForwardCommand(ViewPath.WRONG_REQUEST));
     }

@@ -24,11 +24,27 @@
         <button type="submit">
             Sign up
         </button>
+        <c:choose>
+            <c:when test="${sessionScope.reg_message eq 1}" >
+                <div id="reg-message" class="reg-message reg-success">Success</div>
+                <c:remove var="reg_message" scope="session"/>
+            </c:when>
+            <c:when test="${sessionScope.reg_message eq 2}">
+                <div id="reg-message" class="reg-message reg-invalid_data">Invalid data</div>
+                <c:remove var="reg_message" scope="session"/>
+            </c:when>
+            <c:when test="${sessionScope.reg_message eq 3}">
+                <div id="reg-message" class="reg-message reg-user_exists">Such user already exists</div>
+                <c:remove var="reg_message" scope="session"/>
+            </c:when>
+            <c:when test="${sessionScope.reg_message eq 4}">
+                <div id="reg-message" class="reg-message reg-error">Error during registration</div>
+                <c:remove var="reg_message" scope="session"/>
+            </c:when>
+        </c:choose>
         <div class="link">
             <span>Already have an account?</span>
-            <%--            <a href="/controller?page=registration.jsp">Sign up</a>--%>
             <a href="<c:url value="/login-form"/>">Sign in</a>
-
         </div>
     </form>
 </body>

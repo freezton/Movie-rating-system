@@ -2,7 +2,6 @@ package by.vladpr.movieratingsystem.controller.command.impl;
 
 import by.vladpr.movieratingsystem.controller.command.Command;
 import by.vladpr.movieratingsystem.controller.command.ViewPath;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

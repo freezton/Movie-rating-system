@@ -1,7 +1,7 @@
 package by.vladpr.movieratingsystem.dao.impl;
 
 import by.vladpr.movieratingsystem.dao.UserDao;
-import by.vladpr.movieratingsystem.database.AbstractQueryCreator;
+import by.vladpr.movieratingsystem.database.QueryProvider;
 import by.vladpr.movieratingsystem.entity.Role;
 import by.vladpr.movieratingsystem.entity.User;
 import by.vladpr.movieratingsystem.exception.DaoException;
@@ -13,13 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDaoImpl extends AbstractQueryCreator implements UserDao {
+public class UserDaoImpl extends QueryProvider implements UserDao {
     private static final String FIND_USER_BY_ID_QUERY = "SELECT * FROM users WHERE id=?";
     private static final String SAVE_USER_QUERY = "INSERT INTO users (username, password, role, status, is_banned) VALUES (?, ?, ?, ?, ?)";
     private static final String REMOVE_USER_BY_ID_QUERY = "DELETE FROM users WHERE id=?";
     private static final String FIND_USER_BY_USERNAME_QUERY = "SELECT * FROM users WHERE username=?";
     private static final String FIND_USER_BY_USERNAME_AND_PASSWORD_QUERY = "SELECT * FROM users WHERE username=? AND password=?";
     private static final String FIND_USER_BY_ROLE_QUERY = "SELECT * FROM users WHERE role=?";
+    private static final String UPDATE_USER_INFO = "UPDATE users SET username=?, password=?, role=?, status=?, is_banned=? WHERE id=?";
+
 
     @Override
     public Optional<User> findById(long id) throws DaoException {
@@ -88,6 +90,28 @@ public class UserDaoImpl extends AbstractQueryCreator implements UserDao {
             throw new DaoException(e);
         }
         return list;
+    }
+
+    @Override
+    public boolean isUserExists(String username) throws DaoException {
+        return findByUsername(username).isPresent();
+    }
+
+    @Override
+    public void updateUserInfo(User user) throws DaoException {
+        try (PreparedStatement preparedStatement = createStatement(
+                SAVE_USER_QUERY,
+                user.getUsername(),
+                user.getPassword(),
+                user.getRole().toString(),
+                user.getStatus(),
+                user.isBanned(),
+                user.getId()
+        )) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     private User findUser(PreparedStatement preparedStatement) throws DaoException {

@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public abstract class AbstractQueryCreator {
+public abstract class QueryProvider {
 
     protected PreparedStatement createStatement(String query, Object... params) throws DaoException {
         try {

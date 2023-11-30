@@ -1,8 +1,7 @@
 package by.vladpr.movieratingsystem.dao.impl;
 
 import by.vladpr.movieratingsystem.dao.ReviewDao;
-import by.vladpr.movieratingsystem.database.AbstractQueryCreator;
-import by.vladpr.movieratingsystem.entity.Movie;
+import by.vladpr.movieratingsystem.database.QueryProvider;
 import by.vladpr.movieratingsystem.entity.Review;
 import by.vladpr.movieratingsystem.exception.DaoException;
 
@@ -11,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class ReviewDaoImpl extends AbstractQueryCreator implements ReviewDao {
+public class ReviewDaoImpl extends QueryProvider implements ReviewDao {
 
     private static final String FIND_REVIEW_BY_ID_QUERY = "SELECT * FROM reviews WHERE id=?";
     private static final String SAVE_REVIEW_QUERY = "INSERT INTO reviews (user_id, movie_id, rate, review_text) VALUES (?, ?, ?, ?)";

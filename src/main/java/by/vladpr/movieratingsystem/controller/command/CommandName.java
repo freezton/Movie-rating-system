@@ -7,6 +7,7 @@ public abstract class CommandName {
     public static final String LOGIN_COMMAND = "/login";
     public static final String REGISTER_COMMAND = "/registration";
     public static final String GO_TO_MOVIES_PAGE_COMMAND = "/movies";
+    public static final String GO_TO_ADMIN_PAGE_COMMAND = "/admin";
     public static final String WRONG_REQUEST_COMMAND = "/wrong-request";
 
 }

@@ -15,4 +15,8 @@ public interface UserDao extends Dao<User> {
 
     List<User> findByRoleId(Role role) throws DaoException;
 
+    boolean isUserExists(String username) throws DaoException;
+
+    void updateUserInfo(User user) throws DaoException;
+
 }

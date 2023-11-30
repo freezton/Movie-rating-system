@@ -14,7 +14,7 @@ import java.util.Objects;
 public class ContextListener implements ServletContextListener {
 
     private static final Logger LOGGER = LogManager.getLogger(ContextListener.class);
-    private final String DATABASE_PROPERTIES = "database.properties";
+    private static final String DATABASE_PROPERTIES = "database.properties";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

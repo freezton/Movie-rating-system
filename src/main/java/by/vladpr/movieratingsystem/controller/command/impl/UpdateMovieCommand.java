@@ -22,10 +22,14 @@ public class UpdateMovieCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MovieService movieService = ServiceFactory.getInstance().getMovieService();
-        Optional<Movie> movie;
         try {
-            movie = movieService.getById(Long.parseLong(request.getParameter("movieId")));
-
+            Optional<Movie> movie = movieService.getById(Long.parseLong(request.getParameter("movieId")));
+            if (movie.isPresent()) {
+                movie.get().setTitle(request.getParameter("movieTitle"));
+                movie.get().setDescription(request.getParameter("movieDescription"));
+                movie.get().setYearOfRelease(Integer.parseInt(request.getParameter("movieYear")));
+                response.sendRedirect(request.getHeader("referer"));
+            }
         } catch (ServiceException e) {
             request.setAttribute("error", e.getMessage());
             LOGGER.error("Error while adding movie", e);

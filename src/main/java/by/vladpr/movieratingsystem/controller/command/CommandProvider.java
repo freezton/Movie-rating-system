@@ -36,6 +36,7 @@ public final class CommandProvider {
         repository.put(UPDATE_MOVIE_COMMAND, new UpdateMovieCommand());
         repository.put(GET_MOVIES_COMMAND, new GetMoviesCommand());
         repository.put(GET_MOVIE_COMMAND, new GetMovieCommand());
+        repository.put(GO_TO_REVIEWS_PAGE, new ForwardCommand(ViewPath.MOVIE_PAGE));
 
         repository.put(ERROR503_COMMAND, new ForwardCommand(ViewPath.ERROR503_PAGE));
         repository.put(ERROR404_COMMAND, new ForwardCommand(ViewPath.ERROR404_PAGE));

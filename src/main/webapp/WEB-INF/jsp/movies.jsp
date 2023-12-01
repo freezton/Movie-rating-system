@@ -30,7 +30,7 @@
             <c:forEach var="movie" items="${moviesList}">
                 <br>
                 <div class="movie">
-                    <a href="<c:url value="/controller?command=get_Movie&MovieName=${movie.getTitle()}"/>">
+                    <a href="<c:url value="/review-page?movieId=${movie.getId()}"/>">
 <%--                        <img src="${movie.getImgUrl()}" alt="${movie.getTitle()}" class="poster">--%>
                         <div class="rating">${movie.getRating()}</div>
                         <div class="name">${movie.getTitle()}</div>
@@ -83,7 +83,7 @@
                     <label for="editMovieDescription"><fmt:message key="Movie_description"/></label>
                     <textarea name="movieDescription" id="editMovieDescription" required></textarea>
 
-                    <label for="addMovieYear"><fmt:message key="movie_title"/></label>
+                    <label for="addMovieYear"><fmt:message key="movie_year"/></label>
                     <input type="number" name="movieYear" id="addMovieYear" required>
 
 <%--                    <label for="editMovieImgUrl"><fmt:message key="Movie_image_url"/></label>--%>

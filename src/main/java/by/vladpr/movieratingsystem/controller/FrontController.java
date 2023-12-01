@@ -34,5 +34,4 @@ public class FrontController extends HttpServlet {
         Command command = CommandProvider.getInstance().getCommand(request);
         command.execute(request, response);
     }
-
 }

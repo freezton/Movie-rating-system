@@ -13,4 +13,6 @@ public interface Dao<T> {
     void save(T item) throws DaoException;
 
     void removeById(long id) throws DaoException;
+
+    List<T> findAll() throws DaoException;
 }

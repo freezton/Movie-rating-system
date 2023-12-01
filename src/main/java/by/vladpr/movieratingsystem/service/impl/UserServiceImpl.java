@@ -2,6 +2,7 @@ package by.vladpr.movieratingsystem.service.impl;
 
 import by.vladpr.movieratingsystem.dao.DaoFactory;
 import by.vladpr.movieratingsystem.dao.UserDao;
+import by.vladpr.movieratingsystem.entity.Role;
 import by.vladpr.movieratingsystem.entity.User;
 import by.vladpr.movieratingsystem.exception.DaoException;
 import by.vladpr.movieratingsystem.exception.ServiceException;
@@ -11,10 +12,10 @@ import by.vladpr.movieratingsystem.service.UserService;
 import by.vladpr.movieratingsystem.service.validation.Validator;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-
 
     @Override
     public void register(User user) throws ValidationException, ServiceException, UserAlreadyExistsException {
@@ -48,5 +49,39 @@ public class UserServiceImpl implements UserService {
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public Optional<User> findById(long id) throws ServiceException {
+        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        Optional<User> user;
+        try {
+            user = userDao.findById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return user;
+    }
+
+    @Override
+    public void updateUser(User user) throws ServiceException {
+        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        try {
+            userDao.updateUserInfo(user);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<User> getUserList() throws ServiceException {
+        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        List<User> list;
+        try {
+            list = userDao.findByRoleId(Role.USER);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return list;
     }
 }

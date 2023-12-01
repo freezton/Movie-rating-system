@@ -16,8 +16,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.vladpr.movieratingsystem.controller.command.SessionAttribute.REGISTRATION_MESSAGE;
-
 public class RegisterCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(RegisterCommand.class);
@@ -27,7 +25,6 @@ public class RegisterCommand implements Command {
     private static final int SUCCESSFUL_REGISTRATION = 1;
     private static final int INCORRECT_DATA = 2;
     private static final int USER_ALREADY_EXISTS = 3;
-    private static final int FAILED_REGISTRATION = 4;
 
 
     @Override
@@ -40,20 +37,20 @@ public class RegisterCommand implements Command {
             user.setUsername(request.getParameter(USERNAME_PARAM));
             user.setPassword(request.getParameter(PASSWORD_PARAM));
             userService.register(user);
-            session.setAttribute(REGISTRATION_MESSAGE, SUCCESSFUL_REGISTRATION);
+            session.setAttribute("reg_message", SUCCESSFUL_REGISTRATION);
             viewPath.append(request.getContextPath()).append(CommandName.GO_TO_LOGIN_PAGE_COMMAND);
         } catch (ValidationException e) {
             LOGGER.warn("Incorrect data used", e);
-            session.setAttribute(REGISTRATION_MESSAGE, INCORRECT_DATA);
+            session.setAttribute("reg_message", INCORRECT_DATA);
             viewPath.append(request.getHeader("referer"));
         } catch (UserAlreadyExistsException e) {
             LOGGER.info("Such user already exists", e);
-            session.setAttribute(REGISTRATION_MESSAGE, USER_ALREADY_EXISTS);
+            session.setAttribute("reg_message", USER_ALREADY_EXISTS);
             viewPath.append(request.getHeader("referer"));
         } catch (ServiceException e) {
             LOGGER.error("Error during registration", e);
-            session.setAttribute(REGISTRATION_MESSAGE, FAILED_REGISTRATION);
             viewPath.append(request.getHeader("referer"));
+            viewPath.append(request.getContextPath()).append(CommandName.ERROR503_COMMAND);
         }
         response.sendRedirect(viewPath.toString());
     }

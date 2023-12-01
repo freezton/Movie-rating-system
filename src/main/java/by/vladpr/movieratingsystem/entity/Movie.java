@@ -6,15 +6,17 @@ public class Movie {
     private String title;
     private String description;
     private int yearOfRelease;
+    private double rating;
 
     public Movie() {
     }
 
-    public Movie(int id, String title, String description, int yearOfRelease) {
+    public Movie(int id, String title, String description, int yearOfRelease, double rating) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.yearOfRelease = yearOfRelease;
+        this.rating = rating;
     }
 
     public int getId() {
@@ -47,6 +49,14 @@ public class Movie {
 
     public void setYearOfRelease(int yearOfRelease) {
         this.yearOfRelease = yearOfRelease;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     @Override

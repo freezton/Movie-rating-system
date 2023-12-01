@@ -5,6 +5,7 @@ import by.vladpr.movieratingsystem.exception.ServiceException;
 import by.vladpr.movieratingsystem.exception.UserAlreadyExistsException;
 import by.vladpr.movieratingsystem.exception.ValidationException;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -13,4 +14,9 @@ public interface UserService {
 
     Optional<User> login(String username, String password) throws ValidationException, ServiceException;
 
+    Optional<User> findById(long id) throws ServiceException;
+
+    void updateUser(User user) throws ServiceException;
+
+    List<User> getUserList() throws ServiceException;
 }

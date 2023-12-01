@@ -1,21 +1,18 @@
 package by.vladpr.movieratingsystem.controller.command.impl;
 
 import by.vladpr.movieratingsystem.controller.command.Command;
-import by.vladpr.movieratingsystem.exception.ServiceException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public class WrongRequestCommand implements Command {
-
-    private static final String PAGE = "wrong-request.jsp";
-//    private static final String PAGE = "login.jsp";
+public class ChangeLocaleCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(String.format(VIEW_PATH, PAGE)).forward(request, response);
-
+        String locale = request.getParameter("locale");
+        request.getSession().setAttribute("locale", locale);
+        response.sendRedirect(request.getHeader("referer"));
     }
 }

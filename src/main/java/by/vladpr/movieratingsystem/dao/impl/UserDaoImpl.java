@@ -21,6 +21,7 @@ public class UserDaoImpl extends QueryProvider implements UserDao {
     private static final String FIND_USER_BY_USERNAME_AND_PASSWORD_QUERY = "SELECT * FROM users WHERE username=? AND password=?";
     private static final String FIND_USER_BY_ROLE_QUERY = "SELECT * FROM users WHERE role=?";
     private static final String UPDATE_USER_INFO = "UPDATE users SET username=?, password=?, role=?, status=?, is_banned=? WHERE id=?";
+    private static final String FIND_ALL_QUERY = "SELECT * FROM users";
 
 
     @Override
@@ -60,6 +61,17 @@ public class UserDaoImpl extends QueryProvider implements UserDao {
     }
 
     @Override
+    public List<User> findAll() throws DaoException {
+        List<User> list;
+        try (PreparedStatement preparedStatement = createStatement(FIND_ALL_QUERY)) {
+            list = findUserList(preparedStatement);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return list;
+    }
+
+    @Override
     public Optional<User> findByUsername(String username) throws DaoException {
         User user;
         try (PreparedStatement preparedStatement = createStatement(FIND_USER_BY_USERNAME_QUERY, username)) {
@@ -95,12 +107,12 @@ public class UserDaoImpl extends QueryProvider implements UserDao {
     @Override
     public boolean isUserExists(String username) throws DaoException {
         return findByUsername(username).isPresent();
-    }
+}
 
     @Override
     public void updateUserInfo(User user) throws DaoException {
         try (PreparedStatement preparedStatement = createStatement(
-                SAVE_USER_QUERY,
+                UPDATE_USER_INFO,
                 user.getUsername(),
                 user.getPassword(),
                 user.getRole().toString(),
